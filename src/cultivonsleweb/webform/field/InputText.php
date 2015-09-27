@@ -1,8 +1,18 @@
 <?php 
 namespace cultivonsleweb\webform\field;
 
+/**
+  * Create field : Input Text tag
+  *
+  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+  */
 class InputText 
 {
+	/**
+	  * Generate and return template HTML
+	  *
+	  * @param array $aAttributes default []
+	  */
 	public function getTemplate ($aAttributes=[])
 	{
 		$aAttributes= array_merge([

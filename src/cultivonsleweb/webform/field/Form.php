@@ -1,8 +1,18 @@
 <?php 
 namespace cultivonsleweb\webform\field;
 
+/**
+  * Create field : form tag
+  *
+  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+  */
 class Form 
 {
+	/**
+	  * Generate and return template HTML
+	  *
+	  * @param array $aAttributes default []
+	  */
 	public function getTemplateOpen ($aAttributes=[])
 	{
 		$aAttributes= array_merge([], $aAttributes);

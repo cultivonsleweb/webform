@@ -47,40 +47,40 @@ class WebForm
 		{
 			$aList = $this->aConf[$i];
 			$oClass = $aList['class'];
-			$aData = $aList['data'];
+			$aAttributes = $aList['attributes'];
 			
 			$this->__autoload ($oClass);
 			$oObj = new $oClass ();
 			if ( method_exists($oObj, 'getTemplateOpen') )
 			{
-				if ( 0 !== count ( $aData ))
+				if ( 0 !== count ( $aAttributes ))
 				{
-					$this->sHtml .= $oObj->getTemplateOpen ( $aData );
+					$this->sHtml .= $oObj->getTemplateOpen ( $aAttributes );
 				} else {
 					$this->sHtml .= $oObj->getTemplateOpen ();
 				}
 			}
 			if ( method_exists($oObj, 'getTemplate') )
 			{
-				if ( 0 !== count ( $aData ))
+				if ( 0 !== count ( $aAttributes ))
 				{
-					$this->sHtml .= $oObj->getTemplate ( $aData );
+					$this->sHtml .= $oObj->getTemplate ( $aAttributes );
 				} else {
 					$this->sHtml .= $oObj->getTemplate ();
 				}
 			}
 			if ( method_exists($oObj, 'getTemplateClose') )
 			{
-				if ( 0 !== count ( $aData ))
+				if ( 0 !== count ( $aAttributes ))
 				{
-					$this->sHtml .= $oObj->getTemplateClose ( $aData );
+					$this->sHtml .= $oObj->getTemplateClose ( $aAttributes );
 				} else {
 					$this->sHtml .= $oObj->getTemplateClose ();
 				}
 			}
 			unset($oClass);
 			unset($oObj);
-			unset($aData);
+			unset($aAttributes);
 		}
 		if ( !$this->hasKeyInListField ($sFormClass) )
 		{

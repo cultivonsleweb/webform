@@ -1,8 +1,18 @@
 <?php 
 namespace cultivonsleweb\webform\field;
 
+/**
+  * Create field : Button tag
+  *
+  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+  */
 class Button 
 {
+	/**
+	  * Generate and return template HTML
+	  *
+	  * @param array $aAttributes default []
+	  */
 	public function getTemplate ($aAttributes=[])
 	{
 		$aAttributes= array_merge([

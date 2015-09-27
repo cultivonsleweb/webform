@@ -20,18 +20,18 @@ use cultivonsleweb\WebForm as WebForm;
 		$oWebForm = new WebForm ([
 			0 => [
 					'class' => 'cultivonsleweb\webform\field\InputText',
-					'data' => []
+					'attributes' => []
 				],
 			1 => [
 				'class' => 'cultivonsleweb\webform\field\Button',
-				'data' => [
+				'attributes' => [
 					'text' => 'Save',
 					'class' => 'btn btn-primary'
 					]
 				],
 			2 => [
 				'class' => 'cultivonsleweb\webform\field\Button',
-				'data' =>  [
+				'attributes' =>  [
 					'type' => 'cancel',
 					'text' => 'Cancel',
 					'class' => 'btn btn-default'
