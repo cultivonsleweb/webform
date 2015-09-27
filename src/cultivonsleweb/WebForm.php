@@ -1,18 +1,38 @@
 <?php 
 namespace cultivonsleweb;
 
+/**
+  * WebForm's engine
+  * 
+  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+  */
 class WebForm 
 {
 	public $aConf = [];
 	protected $sHtml = '';
 	protected $aListField = [];
 	
+	/**
+	  * Init WebForm & load conf
+	  *
+	  * @param array $aConf default []
+	  * @return void
+	  * @access public
+	  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+	  */
 	public function __construct($aConf=[])
 	{
 		$this->aConf = $aConf;
 		$this->load ();
 	}
 	
+	/**
+	  * Load data and create fields
+	  *
+	  * @return void
+	  * @access protected
+	  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+	  */
 	protected function load ()
 	{
 		$this->setListFields ($this->aConf);
@@ -68,7 +88,15 @@ class WebForm
 		}
 	}
 	
-	protected function setListFields ($aConf)
+	/**
+	  * Define list of fields
+	  *
+	  * @param array $aConf defaut []
+	  * @return void
+	  * @access protected
+	  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+	  */
+	protected function setListFields ($aConf=[])
 	{
 		for ($i=0; $i < count($aConf); $i++)
 		{
@@ -77,11 +105,26 @@ class WebForm
 		}
 	}
 	
+	/**
+	  * Return list of fields
+	  * 
+	  * @return array
+	  * @access protected
+	  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+	  */
 	protected function getListField ()
 	{
 		return $this->aListField;
 	}
 	
+	/**
+	  * Informed if a field exists in the list of fields
+	  * 
+	  * @param mixed $mKey
+	  * @return boolean
+	  * @access protected
+	  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+	  */
 	protected function hasKeyInListField ($mKey)
 	{
 		if ( isset($this->aListField[$mKey]) )
@@ -91,6 +134,14 @@ class WebForm
 		return false;
 	}
 	
+	/**
+	  * Return content HTML
+	  *
+	  * @param boolean $bDisplay default false Display or no content
+	  * @return string 
+	  * @access public
+	  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+	  */
 	public function render ($bDisplay=false)
 	{
 		if ( $bDisplay )
@@ -102,10 +153,11 @@ class WebForm
 	}
 	
 	/**
-	  * Chargement automatique des fichiers correspondant aux classes instanciées
+	  * Automatic loading of files corresponding to the instantiated class
 	  *
 	  * @param string $sClassName
-	**/
+	  * @author Arnaud Méhat <amehat@cultivonsleweb.com>
+	  */
 	public function __autoload ($sClassName)
 	{
 		$sFileClassName = str_replace ('cultivonsleweb', '', dirname(__FILE__)) . str_replace ('\\', '/', $sClassName) . '.php';
