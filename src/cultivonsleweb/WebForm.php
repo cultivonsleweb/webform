@@ -1,6 +1,8 @@
 <?php 
 namespace cultivonsleweb;
 
+use cultivonsleweb\webform\security\Token as Token;
+
 /**
   * WebForm's engine
   * 
@@ -11,6 +13,7 @@ class WebForm
 	public $aConf = [];
 	protected $sHtml = '';
 	protected $aListField = [];
+	protected $oSecurityToken = null;
 	
 	/**
 	  * Init WebForm & load conf
@@ -22,6 +25,7 @@ class WebForm
 	  */
 	public function __construct($aConf=[])
 	{
+		$this->oSecurityToken = new Token ();
 		$this->aConf = $aConf;
 		$this->load ();
 	}
@@ -42,6 +46,10 @@ class WebForm
 			$this->__autoload ($sFormClass);
 			$oForm = new $sFormClass();
 			$this->sHtml .= $oForm->getTemplateOpen ();
+			
+			$this->sHtml .= $this->oSecurityToken->outputKey();
+		} else {
+			$this->sHtml .= $this->oSecurityToken->outputKey();
 		}
 		for ($i=0; $i < count($this->aConf); $i++)
 		{
@@ -86,6 +94,7 @@ class WebForm
 		{
 			$this->sHtml .= $oForm->getTemplateClose ();
 		}
+		$this->receive ();
 	}
 	
 	/**
@@ -150,6 +159,24 @@ class WebForm
 			return;
 		}
 		return $this->sHtml;
+	}
+	
+	public function receive ()
+	{
+		if ( isset($_POST)){
+			if ($_SERVER['REQUEST_METHOD'] == 'post')
+			{
+				if (!isset($_POST['webform_form_key']) || !$this->oSecurityToken->validate() )
+				{
+					$error = 'Form key error!';
+					return false;
+				} else
+				{
+					$error = 'No form key error!';
+					// it's ok, continue :)
+				}
+			}
+		}
 	}
 	
 	/**

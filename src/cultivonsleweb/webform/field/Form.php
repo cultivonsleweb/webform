@@ -1,6 +1,7 @@
 <?php 
 namespace cultivonsleweb\webform\field;
 
+use cultivonsleweb\webform\Request as Request;
 /**
   * Create field : form tag
   *
@@ -15,7 +16,11 @@ class Form
 	  */
 	public function getTemplateOpen ($aAttributes=[])
 	{
-		$aAttributes= array_merge([], $aAttributes);
+		$aAttributes= array_merge([
+			'action' => Request::geturl (),
+			'method' => 'POST',
+			'enctype' => 'multipart/form-data'
+		], $aAttributes);
 		$sHtml  = '<form';
 		if ( isset($aAttributes['action']))
 		{
@@ -29,6 +34,15 @@ class Form
 		{
 			$sHtml .= ' style="'.$aAttributes['style'].'" ';
 		}
+		if ( isset($aAttributes['method']))
+		{
+			$sHtml .= ' method="'.$aAttributes['method'].'" ';
+		}
+		if ( isset($aAttributes['enctype']))
+		{
+			$sHtml .= ' enctype="'.$aAttributes['enctype'].'" ';
+		}
+		
 		$sHtml .= '>' . PHP_EOL;
 		return $sHtml;
 	}

@@ -2,6 +2,7 @@
 require_once ('..' . DIRECTORY_SEPARATOR . 'bootstrap.php');
 
 use cultivonsleweb\WebForm as WebForm;
+use cultivonsleweb\webform\Configuration as Configuration;
 
 ?>
 <!DOCTYPE html>
@@ -9,6 +10,7 @@ use cultivonsleweb\WebForm as WebForm;
 	<head>
 		<title>WebForm example 01</title>
 		
+		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -17,6 +19,11 @@ use cultivonsleweb\WebForm as WebForm;
 	<body>
 		<div class="container">
 		<?php 
+		$app = Configuration::app ();
+		$app->set ([
+			'lang' => 'fr_fr'
+		]);
+		
 		$oWebForm = new WebForm ([
 			0 => [
 					'class' => 'cultivonsleweb\webform\field\InputText',
